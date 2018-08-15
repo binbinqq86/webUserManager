@@ -2,6 +2,7 @@ package com.tb.system.dao;
 
 import com.tb.system.bean.User;
 import com.tb.system.utils.CloseUtil;
+import com.tb.system.utils.JdbcUtil;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +29,7 @@ public class UserDaoImpl implements IDao<User> {
     }
 
     private UserDaoImpl() {
-        connection = GetConnection.getConnection();
+        connection = JdbcUtil.getConnection();
         String sql = "create table if not exists user" +
                 "(userId int(10) auto_increment primary key," +
                 "userName varchar(20) not null," +
@@ -50,7 +51,7 @@ public class UserDaoImpl implements IDao<User> {
     @Override
     public int[] create(List<User> list) {
         if (connection == null) {
-            connection = GetConnection.getConnection();
+            connection = JdbcUtil.getConnection();
         }
         String sql = "insert into user(userName,nickName,password,role) values(?,?,?,?)";
         try {
@@ -74,7 +75,7 @@ public class UserDaoImpl implements IDao<User> {
     @Override
     public List<User> read(Object o) {
         if (connection == null) {
-            connection = GetConnection.getConnection();
+            connection = JdbcUtil.getConnection();
         }
         List<User> list = new ArrayList<>();
         ResultSet resultSet;
@@ -103,7 +104,7 @@ public class UserDaoImpl implements IDao<User> {
     @Override
     public int[] update(List<User> list) {
         if (connection == null) {
-            connection = GetConnection.getConnection();
+            connection = JdbcUtil.getConnection();
         }
         String sql = "update user set nickName=?,password=?,role=? where userName=?";
         try {
@@ -127,7 +128,7 @@ public class UserDaoImpl implements IDao<User> {
     @Override
     public int[] delete(List<Object> list) {
         if (connection == null) {
-            connection = GetConnection.getConnection();
+            connection = JdbcUtil.getConnection();
         }
         String sql = "delete from user where userName=?";
         try {

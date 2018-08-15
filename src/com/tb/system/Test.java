@@ -1,6 +1,6 @@
 package com.tb.system;
 
-import com.tb.system.dao.GetConnection;
+import com.tb.system.utils.JdbcUtil;
 import com.tb.system.utils.CloseUtil;
 
 import java.sql.*;
@@ -8,7 +8,7 @@ import java.sql.*;
 public class Test {
 
     public static void main(String[] args) {
-        Connection conn = GetConnection.getConnection();
+        Connection conn = JdbcUtil.getConnection();
         Statement statement = null;
         ResultSet resultSet = null;
         try {
@@ -23,7 +23,7 @@ public class Test {
                     System.out.print("     ");
                     System.out.print(resultSet.getString(2));
                     System.out.print("     ");
-                    System.out.println(resultSet.getString(3));
+                    System.out.println(resultSet.getString(4));
                 }
             }
         } catch (SQLException e) {
