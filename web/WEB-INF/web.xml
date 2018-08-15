@@ -13,6 +13,15 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
+        <!--
+        实际访问的路径，默认是web文件夹下面，如果页面在其他目录下，需要加上该目录
+        如果在web下面，直接/LoginServlet就可以
+        -->
+        <!--<url-pattern>/user/LoginServlet</url-pattern>-->
+        <!--
+        或者直接把表单指向地址写成这样：action="<%=request.getContextPath()%>/LoginServlet"
+        <%=request.getContextPath()%>指向当前默认目录，就是部署服务器配置的Application context
+        -->
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
 

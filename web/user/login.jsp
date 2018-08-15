@@ -25,7 +25,7 @@
 </head>
 <body>
 <h1 align="center">用户登录</h1>
-<form action="LoginServlet" method="post">
+<form action="<%=request.getContextPath()%>/LoginServlet" method="post">
     <table align="center">
         <tr>
             <td width="80" align="right">用户名：</td>

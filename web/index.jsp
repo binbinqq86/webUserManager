@@ -13,7 +13,7 @@
 <body>
 <div>
     <span style="float:right;">
-        <a name="login" href="./user/login.jsp">登录</a>
+        <a name="login" href="user/login.jsp">登录</a>
         <a name="register" href="user/register.jsp">注册</a>
     </span>
     <span style="float:left;">欢迎${welcome}来到</span>
