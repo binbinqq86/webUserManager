@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 public class UserDaoImplTest {
 
-    private UserDaoImpl userDao = new UserDaoImpl();
+    private UserDaoImpl userDao = UserDaoImpl.getInstance();
     private List<User> list = new ArrayList<>();
 
 

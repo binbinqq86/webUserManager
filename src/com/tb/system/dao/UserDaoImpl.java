@@ -19,9 +19,39 @@ public class UserDaoImpl implements IDao<User> {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
+    public static UserDaoImpl getInstance() {
+        return SingletonInstance.instance;
+    }
+
+    private static class SingletonInstance {
+        public static UserDaoImpl instance = new UserDaoImpl();
+    }
+
+    private UserDaoImpl() {
+        connection = GetConnection.getConnection();
+        String sql = "create table if not exists user" +
+                "(userId int(10) auto_increment primary key," +
+                "userName varchar(20) not null," +
+                "nickName varchar(20) null," +
+                "password varchar(20) not null," +
+                "role int(5) default '0' not null," +
+                "constraint userName unique (userName)" +
+                ")";
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            CloseUtil.closeQuietly(connection, preparedStatement);
+        }
+    }
+
     @Override
     public int[] create(List<User> list) {
-        connection = GetConnection.getConnection();
+        if (connection == null) {
+            connection = GetConnection.getConnection();
+        }
         String sql = "insert into user(userName,nickName,password,role) values(?,?,?,?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -43,8 +73,10 @@ public class UserDaoImpl implements IDao<User> {
 
     @Override
     public List<User> read(Object o) {
+        if (connection == null) {
+            connection = GetConnection.getConnection();
+        }
         List<User> list = new ArrayList<>();
-        connection = GetConnection.getConnection();
         ResultSet resultSet;
         String sql = "select * from user where userName=?";
         try {
@@ -70,7 +102,9 @@ public class UserDaoImpl implements IDao<User> {
 
     @Override
     public int[] update(List<User> list) {
-        connection = GetConnection.getConnection();
+        if (connection == null) {
+            connection = GetConnection.getConnection();
+        }
         String sql = "update user set nickName=?,password=?,role=? where userName=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
@@ -92,7 +126,9 @@ public class UserDaoImpl implements IDao<User> {
 
     @Override
     public int[] delete(List<Object> list) {
-        connection = GetConnection.getConnection();
+        if (connection == null) {
+            connection = GetConnection.getConnection();
+        }
         String sql = "delete from user where userName=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
