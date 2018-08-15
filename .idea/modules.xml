@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/tbTest.iml" filepath="$PROJECT_DIR$/tbTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/webUserManager.iml" filepath="$PROJECT_DIR$/webUserManager.iml" />
     </modules>
   </component>
 </project>
