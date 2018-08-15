@@ -24,7 +24,7 @@ public class UserDaoImpl implements IDao<User> {
     }
 
     private static class SingletonInstance {
-        public static UserDaoImpl instance = new UserDaoImpl();
+        private static final UserDaoImpl instance = new UserDaoImpl();
     }
 
     private UserDaoImpl() {

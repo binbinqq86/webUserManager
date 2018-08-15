@@ -30,13 +30,13 @@
         <tr>
             <td width="80" align="right">用户名：</td>
             <td>
-                <input id="userName" type="text" placeholder="请输入用户名"/>
+                <input id="userName" name="userName" type="text" placeholder="请输入用户名"/>
             </td>
         </tr>
         <tr>
             <td width="80" align="right">密码：</td>
             <td>
-                <input id="password" type="password" placeholder="请输入密码"/>
+                <input id="password" name="password" type="password" placeholder="请输入密码"/>
             </td>
         </tr>
     </table>

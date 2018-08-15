@@ -28,8 +28,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPost(req, resp);
         resp.setContentType("text/html;charset=uft-8");
-        System.out.println("********************");
-        //此处对应JSP中的标签名
+        //此处对应JSP中的标签名，必须是name属性
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
         HttpSession httpSession = req.getSession();
