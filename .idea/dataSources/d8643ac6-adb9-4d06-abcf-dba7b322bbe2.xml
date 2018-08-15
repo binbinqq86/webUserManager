@@ -1129,17 +1129,24 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="282" parent="277" name="userName">
+    <column id="282" parent="277" name="role">
+      <Position>5</Position>
+      <DataType>int(2)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="283" parent="277" name="userName">
       <ColNames>userName</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="283" parent="277" name="PRIMARY">
+    <key id="284" parent="277" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>userId</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="284" parent="277" name="userName">
+    <key id="285" parent="277" name="userName">
       <ColNames>userName</ColNames>
       <UnderlyingIndexName>userName</UnderlyingIndexName>
     </key>

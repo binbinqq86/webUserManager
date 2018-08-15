@@ -22,13 +22,14 @@ public class UserDaoImpl implements IDao<User> {
     @Override
     public int[] create(List<User> list) {
         connection = GetConnection.getConnection();
-        String sql = "insert into user(userName,nickName,password) values(?,?,?)";
+        String sql = "insert into user(userName,nickName,password,role) values(?,?,?,?)";
         try {
             preparedStatement = connection.prepareStatement(sql);
             for (User user : list) {
                 preparedStatement.setString(1, user.userName);
                 preparedStatement.setString(2, user.nickName);
                 preparedStatement.setString(3, user.password);
+                preparedStatement.setInt(4, user.role);
                 preparedStatement.addBatch();
             }
             return preparedStatement.executeBatch();
@@ -53,9 +54,9 @@ public class UserDaoImpl implements IDao<User> {
             while (resultSet.next()) {
                 User user = new User();
                 user.userName = o.toString();
-                user.nickName=resultSet.getString("nickName");
+                user.nickName = resultSet.getString("nickName");
                 user.password = resultSet.getString("password");
-                user.userId= resultSet.getInt("userId");
+                user.userId = resultSet.getInt("userId");
                 list.add(user);
             }
             return list;
@@ -70,13 +71,14 @@ public class UserDaoImpl implements IDao<User> {
     @Override
     public int[] update(List<User> list) {
         connection = GetConnection.getConnection();
-        String sql = "update user set nickName=?,password=? where userName=?";
+        String sql = "update user set nickName=?,password=?,role=? where userName=?";
         try {
             preparedStatement = connection.prepareStatement(sql);
             for (User user : list) {
                 preparedStatement.setString(1, user.nickName);
                 preparedStatement.setString(2, user.password);
-                preparedStatement.setString(3, user.userName);
+                preparedStatement.setInt(3, user.role);
+                preparedStatement.setString(4, user.userName);
                 preparedStatement.addBatch();
             }
             return preparedStatement.executeBatch();
