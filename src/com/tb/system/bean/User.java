@@ -25,4 +25,15 @@ public class User implements Serializable {
      * 用户密码
      */
     public String password;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", role=" + role +
+                ", userName='" + userName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

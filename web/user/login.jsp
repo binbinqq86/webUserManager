@@ -22,6 +22,15 @@
             }
         }
     </script>
+    <%
+        Object message = request.getAttribute("msg");
+        if (message != null && !"".equals(message)) {
+    %>
+    <script type="text/javascript">
+        alert("<%=message%>");
+    </script>
+    <%
+        } %>
 </head>
 <body>
 <h1 align="center">用户登录</h1>

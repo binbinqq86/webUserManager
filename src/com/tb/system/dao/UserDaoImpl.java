@@ -44,17 +44,18 @@ public class UserDaoImpl implements IDao<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            CloseUtil.closeQuietly(connection, preparedStatement);
+            //这里不要关闭，因为是链式调用
+//            CloseUtil.closeQuietly(connection, preparedStatement);
         }
     }
 
     @Override
     public int[] create(List<User> list) {
-        if (connection == null) {
-            connection = JdbcUtil.getConnection();
-        }
         String sql = "insert into user(userName,nickName,password,role) values(?,?,?,?)";
         try {
+            if (connection == null || connection.isClosed()) {
+                connection = JdbcUtil.getConnection();
+            }
             preparedStatement = connection.prepareStatement(sql);
             for (User user : list) {
                 preparedStatement.setString(1, user.userName);
@@ -74,22 +75,28 @@ public class UserDaoImpl implements IDao<User> {
 
     @Override
     public List<User> read(Object o) {
-        if (connection == null) {
-            connection = JdbcUtil.getConnection();
-        }
         List<User> list = new ArrayList<>();
         ResultSet resultSet;
         String sql = "select * from user where userName=?";
+        if (o == null) {
+            sql = "select * from user";
+        }
         try {
+            if (connection == null || connection.isClosed()) {
+                connection = JdbcUtil.getConnection();
+            }
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, String.valueOf(o));
+            if (o != null) {
+                preparedStatement.setString(1, String.valueOf(o));
+            }
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 User user = new User();
-                user.userName = o.toString();
+                user.userName = resultSet.getString("userName");
                 user.nickName = resultSet.getString("nickName");
                 user.password = resultSet.getString("password");
                 user.userId = resultSet.getInt("userId");
+                user.role = resultSet.getInt("role");
                 list.add(user);
             }
             return list;
@@ -103,11 +110,11 @@ public class UserDaoImpl implements IDao<User> {
 
     @Override
     public int[] update(List<User> list) {
-        if (connection == null) {
-            connection = JdbcUtil.getConnection();
-        }
         String sql = "update user set nickName=?,password=?,role=? where userName=?";
         try {
+            if (connection == null || connection.isClosed()) {
+                connection = JdbcUtil.getConnection();
+            }
             preparedStatement = connection.prepareStatement(sql);
             for (User user : list) {
                 preparedStatement.setString(1, user.nickName);
@@ -127,11 +134,11 @@ public class UserDaoImpl implements IDao<User> {
 
     @Override
     public int[] delete(List<Object> list) {
-        if (connection == null) {
-            connection = JdbcUtil.getConnection();
-        }
         String sql = "delete from user where userName=?";
         try {
+            if (connection == null || connection.isClosed()) {
+                connection = JdbcUtil.getConnection();
+            }
             preparedStatement = connection.prepareStatement(sql);
             for (Object o : list) {
                 preparedStatement.setString(1, String.valueOf(o));

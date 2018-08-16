@@ -1,3 +1,7 @@
+<%@ page import="com.tb.system.bean.User" %>
+<%@ page import="com.tb.system.utils.JdbcUtil" %>
+<%@ page import="com.tb.system.dao.UserDaoImpl" %>
+<%@ page import="java.util.List" %>
 <%--
   Created by IntelliJ IDEA.
   User: tb
@@ -9,14 +13,29 @@
 <html>
 <head>
     <title>用户管理系统</title>
+    <%
+        User user = (User) session.getAttribute("user");
+        String getRole = "";
+        if (user != null && !"".equals(user)) {
+    %>
+    <script type="text/javascript">
+        alert("<%=user.userName%>登录成功");
+    </script>
+    <%
+            if (user.role == -1)
+                getRole = "管理员:";
+            else
+                getRole = "普通用户:";
+        } %>
 </head>
 <body>
+
 <div>
     <span style="float:right;">
         <a name="login" href="user/login.jsp">登录</a>
         <a name="register" href="user/register.jsp">注册</a>
     </span>
-    <span style="float:left;">欢迎${welcome}来到</span>
+    <a style="float:left;">欢迎<%=getRole%>${welcome}来到</a>
 </div>
 <h1 align="center">用户管理系统</h1>
 <div align="center">
@@ -30,6 +49,38 @@
             <th align="left" width="100">用户角色</th>
             <th align="left" width="80">操作</th>
         </tr>
+        <%
+            List<User> allUser = UserDaoImpl.getInstance().read(null);
+            for (User u : allUser) {
+                String role = "普通用户";
+                if (u.role == -1) {
+                    role = "管理员";
+                }
+                if (u.nickName == null || "".equals(u.nickName)) {
+                    u.nickName = u.userName;
+                }
+                if (user == null) {
+                    //未登录禁止查看
+                    return;
+                }
+        %>
+        <tr>
+            <td align="left" width="50"><%=u.userId%>
+            </td>
+            <td align="left" width="150"><%=u.userName%>
+            </td>
+            <td align="left" width="150"><%=u.nickName%>
+            </td>
+            <td align="left" width="100"><%=role%>
+            </td>
+            <td align="left" width="80">
+                <a>修改</a>
+                <a>删除</a>
+            </td>
+        </tr>
+        <%
+            }
+        %>
     </table>
 </div>
 </body>
