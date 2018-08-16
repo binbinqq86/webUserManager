@@ -24,7 +24,8 @@ public class AddOrRegisterUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=uft-8");
+        resp.setContentType("text/html;charset=utf-8");
+        req.setCharacterEncoding("utf-8");//写入数据库防止乱码
         String userName = req.getParameter("userName");
         String nickName = req.getParameter("nickName");
         String password = req.getParameter("password");

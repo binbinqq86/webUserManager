@@ -37,7 +37,7 @@ public class UserDaoImpl implements IDao<User> {
                 "password varchar(20) not null," +
                 "role int(5) default '0' not null," +
                 "constraint userName unique (userName)" +
-                ")";
+                ") DEFAULT CHARSET=utf8";
         try {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.execute();

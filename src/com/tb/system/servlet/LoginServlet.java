@@ -28,7 +28,8 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //必须注释掉，里面已经resp.sendError了
 //        super.doPost(req, resp);
-        resp.setContentType("text/html;charset=uft-8");
+        resp.setContentType("text/html;charset=utf-8");
+        req.setCharacterEncoding("utf-8");//写入数据库防止乱码
         //此处对应JSP中的标签名，必须是name属性
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");

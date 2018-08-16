@@ -26,7 +26,17 @@
                 getRole = "管理员:";
             else
                 getRole = "普通用户:";
-        } %>
+        }
+
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && !"".equals(userName)) {
+    %>
+    <script type="text/javascript">
+        alert("删除<%=userName%>成功");
+    </script>
+    <%
+        }
+    %>
 </head>
 <body>
 
@@ -37,6 +47,7 @@
     </span>
     <a style="float:left;">欢迎<%=getRole%>${welcome}来到</a>
 </div>
+<br>
 <h1 align="center">用户管理系统</h1>
 <div align="center">
     <a name="addUser" href="user/addOrRegister.jsp">增加用户</a>
@@ -74,8 +85,8 @@
             <td align="left" width="100"><%=role%>
             </td>
             <td align="left" width="80">
-                <a name="update" href="user/updateUser.jsp">修改</a>
-                <a name="delete" href="<%=request.getContextPath()%>/DeleteUserServlet">删除</a>
+                <a name="update" href="user/updateUser.jsp?userName=<%=u.userName%>">修改</a>
+                <a name="delete" href="<%=request.getContextPath()%>/DeleteUserServlet?userName=<%=u.userName%>">删除</a>
             </td>
         </tr>
         <%

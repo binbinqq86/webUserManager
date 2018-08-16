@@ -9,26 +9,24 @@
 <html>
 <head>
     <title>修改用户</title>
+    <%
+        String userName = request.getParameter("userName");
+    %>
 </head>
 <body>
-<form action="<%=request.getContextPath()%>/LoginServlet" method="post">
+<form action="<%=request.getContextPath()%>/UpdateUserServlet" method="post">
+    <input style="display: none" name="userName" value="<%=userName%>">
     <table align="center">
         <tr>
-            <td width="80" align="right">用户名：</td>
+            <td width="80" align="right">昵称：</td>
             <td>
-                <input id="userName" name="userName" type="text" placeholder="请输入用户名"/>
-            </td>
-        </tr>
-        <tr>
-            <td width="80" align="right">密码：</td>
-            <td>
-                <input id="password" name="password" type="password" placeholder="请输入密码"/>
+                <input id="nickName" name="nickName" type="text" placeholder="请输入昵称"/>
             </td>
         </tr>
     </table>
     <p></p>
     <div align="center">
-        <input name="login" value="登录" type="submit" class="inputText" style="color: #000000" onclick="return check()">
+        <input name="login" value="修改" type="submit" class="inputText" style="color: #000000">
 
     </div>
 </form>
