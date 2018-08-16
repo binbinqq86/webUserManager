@@ -27,7 +27,7 @@ public class JdbcUtil {
     public static Connection getConnection() {
         Connection connection = null;
         try {
-            Class.forName(DRIVER_NAME);
+            Class.forName(DRIVER_NAME);//注意要把jdbc的jar包放到tomcat的lib目录下
             connection = DriverManager.getConnection(URL, USER_NAME, PASSWORD);
             if(connection!=null){
                 System.out.println("connection to the database is success......");

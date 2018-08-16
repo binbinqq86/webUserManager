@@ -19,7 +19,7 @@
         if (user != null && !"".equals(user)) {
     %>
     <script type="text/javascript">
-        alert("<%=user.userName%>登录成功");
+        alert("<%=user.userName%>操作成功");
     </script>
     <%
             if (user.role == -1)
@@ -33,13 +33,13 @@
 <div>
     <span style="float:right;">
         <a name="login" href="user/login.jsp">登录</a>
-        <a name="register" href="user/register.jsp">注册</a>
+        <a name="register" href="user/addOrRegister.jsp">注册</a>
     </span>
     <a style="float:left;">欢迎<%=getRole%>${welcome}来到</a>
 </div>
 <h1 align="center">用户管理系统</h1>
 <div align="center">
-    <a name="addUser" href="user/addUser.jsp">增加用户</a>
+    <a name="addUser" href="user/addOrRegister.jsp">增加用户</a>
     <p></p>
     <table width="" border="1" cellpadding="10" cellspacing="1" bgcolor="#ffffff" align="center">
         <tr>
@@ -74,8 +74,8 @@
             <td align="left" width="100"><%=role%>
             </td>
             <td align="left" width="80">
-                <a>修改</a>
-                <a>删除</a>
+                <a name="update" href="user/updateUser.jsp">修改</a>
+                <a name="delete" href="<%=request.getContextPath()%>/DeleteUserServlet">删除</a>
             </td>
         </tr>
         <%

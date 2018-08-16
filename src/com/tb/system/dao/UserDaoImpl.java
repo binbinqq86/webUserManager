@@ -44,9 +44,26 @@ public class UserDaoImpl implements IDao<User> {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            //这里不要关闭，因为是链式调用
-//            CloseUtil.closeQuietly(connection, preparedStatement);
+            CloseUtil.closeQuietly(connection, preparedStatement);
         }
+
+        List<User> list=read(null);
+        if(list!=null&&list.size()>0){
+            for (User u:list) {
+                if(u.userName.equals("admin")){
+                    return;
+                }
+            }
+        }
+        //添加一个默认的管理员
+        List<User> l=new ArrayList<>();
+        User u=new User();
+        u.userName="admin";
+        u.nickName="admin";
+        u.role=-1;
+        u.password="admin";
+        l.add(u);
+        create(l);
     }
 
     @Override
