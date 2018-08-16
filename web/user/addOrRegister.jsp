@@ -9,6 +9,17 @@
 <html>
 <head>
     <title>注册</title>
+    <%
+        String msg= (String) request.getAttribute("msg");
+        if(msg!=null&&!"".equals(msg)){
+    %>
+
+    <script type="text/javascript">
+        alert("<%=msg%>");
+    </script>
+    <%
+        }
+    %>
 </head>
 <body>
 <form action="<%=request.getContextPath()%>/AddOrRegisterUserServlet" method="post">

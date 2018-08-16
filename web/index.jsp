@@ -70,10 +70,10 @@
                 if (u.nickName == null || "".equals(u.nickName)) {
                     u.nickName = u.userName;
                 }
-                if (user == null) {
-                    //未登录禁止查看
-                    return;
-                }
+//                if (user == null) {
+//                    //未登录禁止查看
+//                    return;
+//                }
         %>
         <tr>
             <td align="left" width="50"><%=u.userId%>

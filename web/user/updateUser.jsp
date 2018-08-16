@@ -11,7 +11,17 @@
     <title>修改用户</title>
     <%
         String userName = request.getParameter("userName");
+        String msg= (String) request.getAttribute("msg");
+        if(msg!=null&&!"".equals(msg)){
+            %>
+
+    <script type="text/javascript">
+        alert("<%=msg%>");
+    </script>
+    <%
+        }
     %>
+
 </head>
 <body>
 <form action="<%=request.getContextPath()%>/UpdateUserServlet" method="post">
